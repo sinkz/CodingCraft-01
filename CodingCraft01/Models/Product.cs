@@ -16,6 +16,6 @@ namespace CodingCraft01.Models
         public decimal Price { get; set; }
         public int Quantity { get; set; }
 
-        public virtual List<Supplier>ProductsSuppliers { get; set; }
+        public virtual ICollection<ProductsSuppliers> ProductsSuppliers { get; set; }
     }
 }

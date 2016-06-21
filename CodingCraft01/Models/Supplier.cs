@@ -10,7 +10,7 @@ namespace CodingCraft01.Models
     {
         [Key]
         public int IDSupplier { get; set; }
-
-        public virtual List<Product> ProductsSuppliers { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<ProductsSuppliers> ProductsSuppliers { get; set; }
     }
 }

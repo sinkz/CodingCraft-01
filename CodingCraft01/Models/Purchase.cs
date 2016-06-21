@@ -10,5 +10,12 @@ namespace CodingCraft01.Models
     {
         [Key]
         public int IDPurchase { get; set; }
+        public decimal Total { get; set; }
+        public DateTime DatePurchase { get; set; }
+        public DateTime DatePayment { get; set; }
+
+        public List<ProductsSuppliers> ProductItems { get; set; }
+
+        public ApplicationUser User { get; set; }
     }
 }

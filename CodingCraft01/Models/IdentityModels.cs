@@ -29,6 +29,7 @@ namespace CodingCraft01.Models
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<ProductsSuppliers> ProductsSuppliers { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
 
