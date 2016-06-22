@@ -20,6 +20,12 @@ namespace CodingCraft01.Controllers
             return View(db.Suppliers.ToList());
         }
 
+        public ActionResult getProducts()
+        {
+            ViewBag.Products = db.Products.ToList();
+            return PartialView("_Product", new ProductsSuppliers());
+        }
+
         // GET: Suppliers/Details/5
         public ActionResult Details(int? id)
         {
