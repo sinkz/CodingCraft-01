@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
@@ -55,4 +55,20 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || !isNaN(Globalize.parseFloat(value));
+        }
+        $.validator.methods.range = function (value, element, param) {
+            return this.optional(element) || (Globalize.parseFloat(value) >= param[0] && Globalize.parseFloat(value) <= param[1]);
+        }
+
+        $(document).ready(function () {
+            Globalize.culture('pt-BR');
+
+            // Only there to show which culture are being used.
+            console.log(Globalize.culture().name);
+        });
+    </script>
 }

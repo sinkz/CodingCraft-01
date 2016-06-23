@@ -11,7 +11,7 @@ namespace CodingCraft01.Models
         [Key]
         public int IdProduct { get; set; }
         [Required(ErrorMessage = "Enter Product Name")]
-        [StringLength(100, ErrorMessage = "The max lenght is{1}", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The max lenght is{1}", MinimumLength = 1)]
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }

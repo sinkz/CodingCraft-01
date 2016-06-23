@@ -52,7 +52,7 @@ namespace CodingCraft01.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDSupplier,Name")] Supplier supplier)
+        public ActionResult Create([Bind(Include = "IDSupplier,Name,ProductsSuppliers")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
@@ -84,8 +84,15 @@ namespace CodingCraft01.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDSupplier,Name")] Supplier supplier)
+        public ActionResult Edit([Bind(Include = "IDSupplier,Name,ProductsSuppliers")] Supplier supplier)
         {
+  
+            foreach (var item in supplier.ProductsSuppliers)
+            {
+                item.IDSupplier = supplier.IDSupplier;
+      
+            }
+            Console.WriteLine(supplier);
             if (ModelState.IsValid)
             {
                 db.Entry(supplier).State = EntityState.Modified;
