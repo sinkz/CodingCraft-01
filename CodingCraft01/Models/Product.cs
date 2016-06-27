@@ -9,12 +9,13 @@ namespace CodingCraft01.Models
     public class Product
     {
         [Key]
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public decimal Price { get; set; }
 
-        public virtual ICollection<ProductsSuppliers> ProductsSuppliers { get; set; }
+        public virtual ICollection<ProductSupplier> ProductsSuppliers { get; set; }
+        public virtual ICollection<PurchaseProduct> PurchaseProducts { get; set; }
     }
 }

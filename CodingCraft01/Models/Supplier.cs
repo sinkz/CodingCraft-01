@@ -9,9 +9,9 @@ namespace CodingCraft01.Models
     public class Supplier
     {
         [Key]
-        public int SupplierId { get; set; }
+        public Guid SupplierId { get; set; }
         [Required]
         public string Name { get; set; }
-        public virtual ICollection<ProductsSuppliers> ProductsSuppliers { get; set; }
+        public virtual ICollection<ProductSupplier> ProductsSuppliers { get; set; }
     }
 }
