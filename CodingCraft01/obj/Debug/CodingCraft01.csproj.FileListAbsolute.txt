@@ -241,7 +241,6 @@ C:\Users\Adiego\Source\Repos\CodingCraft-01\CodingCraft01\bin\Microsoft.Owin.Sec
 C:\Users\Adiego\Source\Repos\CodingCraft-01\CodingCraft01\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Adiego\Source\Repos\CodingCraft-01\CodingCraft01\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Adiego\Source\Repos\CodingCraft-01\CodingCraft01\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Adiego\Source\Repos\CodingCraft-01\CodingCraft01\obj\Debug\CodingCraft01.csprojResolveAssemblyReference.cache
 C:\Users\Adiego\Source\Repos\CodingCraft-01\CodingCraft01\obj\Debug\CodingCraft01.dll
 C:\Users\Adiego\Source\Repos\CodingCraft-01\CodingCraft01\obj\Debug\CodingCraft01.pdb
 C:\Users\Adiego\Source\Repos\CodingCraft-01\CodingCraft01\bin\BeginCollectionItem.dll

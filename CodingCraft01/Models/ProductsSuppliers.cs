@@ -10,13 +10,12 @@ namespace CodingCraft01.Models
     public class ProductsSuppliers
     {
         [Key]
-        public int Id { get; set; }
+        public int ProductSupplierId { get; set; }
+        [Required]
         public decimal Price { get; set; }
-
-        [DisplayName("Product")]
-        public int IdProduct { get; set; }
-        [DisplayName("Supplier")]
-        public int IDSupplier { get; set; }
+ 
+        public int ProductId { get; set; }
+        public int SupplierId { get; set; }
 
         public virtual Product Product { get; set; }
         public virtual Supplier Supplier { get; set; }

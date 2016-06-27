@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections;
+using CodingCraft01.Migrations;
 
 namespace CodingCraft01.Models
 {
@@ -27,11 +28,17 @@ namespace CodingCraft01.Models
         {
         }
 
+        static ApplicationDbContext()
+        {
+            // Set the database intializer which is run once during application start
+            // This seeds the database with admin user credentials and admin role
+            // Database.SetInitializer<ApplicationDbContext>(new ApplicationDbInitializer());
+            Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<ProductsSuppliers> ProductsSuppliers { get; set; }
-        public DbSet<Sale> Sales { get; set; }
-        public DbSet<Purchase> Purchases { get; set; }
 
         public static ApplicationDbContext Create()
         {

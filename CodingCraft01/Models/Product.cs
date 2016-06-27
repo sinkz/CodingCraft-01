@@ -9,12 +9,11 @@ namespace CodingCraft01.Models
     public class Product
     {
         [Key]
-        public int IdProduct { get; set; }
-        [Required(ErrorMessage = "Enter Product Name")]
-        [StringLength(100, ErrorMessage = "The max lenght is{1}", MinimumLength = 1)]
+        public int ProductId { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public decimal Price { get; set; }
-        public int Quantity { get; set; }
 
         public virtual ICollection<ProductsSuppliers> ProductsSuppliers { get; set; }
     }

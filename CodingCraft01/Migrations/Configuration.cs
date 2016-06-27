@@ -10,6 +10,7 @@ namespace CodingCraft01.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(CodingCraft01.Models.ApplicationDbContext context)
