@@ -18,15 +18,20 @@ namespace CodingCraft01.Controllers
         // GET: Purchases
         public async Task<ActionResult> Index()
         {
-            return View(await db.Purchases.ToListAsync());
+            var purchases = db.Purchases.Include(p => p.Supplier);
+            return View(await purchases.ToListAsync());
         }
 
-        public ActionResult NewLineProducts(Guid? PurchaseId = null)
+        public ActionResult NewLineProducts(string input, Guid? PurchaseId = null)
         {
-            ViewBag.Products = new SelectList(db.Products, "ProductId", "Name", "Price");
+            ViewBag.Products = new SelectList(db.ProductsSuppliers.Where(p => p.SupplierId == new Guid(input)).Select(p => p.Product).ToList(),
+                "ProductId", "Name", "Price");
             return PartialView("_LinePurchaseProduct", new PurchaseProduct { PurchaseProductId = Guid.NewGuid() });
         }
 
+
+
+  
         // GET: Purchases/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
@@ -45,6 +50,7 @@ namespace CodingCraft01.Controllers
         // GET: Purchases/Create
         public ActionResult Create()
         {
+            ViewBag.SupplierId = new SelectList(db.Suppliers, "SupplierId", "Name");
             return View(new Purchase
             {
                 PurchaseProducts = new List<PurchaseProduct>()
@@ -56,16 +62,24 @@ namespace CodingCraft01.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "PurchaseId,Total,DatePurchase,PayDay,PurchaseProducts")] Purchase purchase)
+        public async Task<ActionResult> Create([Bind(Include = "PurchaseId,SupplierId,DatePurchase,PayDay,PurchaseProducts")] Purchase purchase)
         {
+
             if (ModelState.IsValid)
             {
+                var total = new Decimal(0);
+                foreach (PurchaseProduct p in purchase.PurchaseProducts)
+                {
+                    total += (p.Price * p.Quantity);
+                }
+                purchase.TotalPurchase = total;
                 purchase.PurchaseId = Guid.NewGuid();
                 db.Purchases.Add(purchase);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.SupplierId = new SelectList(db.Suppliers, "SupplierId", "Name", purchase.SupplierId);
             return View(purchase);
         }
 
@@ -81,6 +95,7 @@ namespace CodingCraft01.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.SupplierId = new SelectList(db.Suppliers, "SupplierId", "Name", purchase.SupplierId);
             return View(purchase);
         }
 
@@ -89,7 +104,7 @@ namespace CodingCraft01.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "PurchaseId,Total,DatePurchase,PayDay")] Purchase purchase)
+        public async Task<ActionResult> Edit([Bind(Include = "PurchaseId,SupplierId,DatePurchase,PayDay")] Purchase purchase)
         {
             if (ModelState.IsValid)
             {
@@ -97,6 +112,7 @@ namespace CodingCraft01.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.SupplierId = new SelectList(db.Suppliers, "SupplierId", "Name", purchase.SupplierId);
             return View(purchase);
         }
 

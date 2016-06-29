@@ -6,10 +6,12 @@
     </a>
     <script type="text/javascript">
         $("#adicionar-novo-produtopurchase").click(function () {
-            $.get('/Purchases/NewLineProducts', function (template) {
+            var id = $('#SupplierId').val();
+            $.get('/Purchases/NewLineProducts', { input: id }, function (template) {
                 $("#area-produtospurchase").append(template);
             });
         });
+
     </script>
 </div>
 
