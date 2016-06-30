@@ -25,8 +25,24 @@
         <dd>
             @Html.DisplayFor(model => model.Price)
         </dd>
-
     </dl>
+    <h4>Suppliers</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.ProductsSuppliers)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Supplier.Name)</td>
+            </tr>
+        }
+
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |

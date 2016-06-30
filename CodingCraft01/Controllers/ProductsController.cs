@@ -89,7 +89,14 @@ namespace CodingCraft01.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            ViewBag.sup = product.ProductsSuppliers;
+            return View(new Product
+            {
+                Price = product.Price,
+                Name = product.Name,
+                ProductId = product.ProductId,
+                ProductsSuppliers = new List<ProductSupplier>()
+            });
         }
 
         // POST: Products/Edit/5
@@ -97,10 +104,17 @@ namespace CodingCraft01.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProductId,Name,Price")] Product product)
+        public async Task<ActionResult> Edit([Bind(Include = "ProductId,Name,Price,ProductsSuppliers")] Product product)
         {
             if (ModelState.IsValid)
             {
+                foreach (var item in product.ProductsSuppliers)
+                {
+                    item.ProductId = product.ProductId;
+                    db.ProductsSuppliers.Add(item);
+
+                }
+                
                 db.Entry(product).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
