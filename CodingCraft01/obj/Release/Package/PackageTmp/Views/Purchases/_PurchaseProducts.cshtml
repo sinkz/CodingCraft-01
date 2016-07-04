@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CodingCraft01.Models.PurchaseProduct>
+
+<div class="actions">
+    <a class="btn btn-default btn-sm" id="adicionar-novo-produtopurchase">
+        Adicionar Novo Produto
+    </a>
+    <script type="text/javascript">
+        $("#adicionar-novo-produtopurchase").click(function () {
+            var id = $('#SupplierId').val();
+            $.get('/Purchases/NewLineProducts', { input: id }, function (template) {
+                $("#area-produtospurchase").append(template);
+            });
+        });
+
+    </script>
+</div>
+
+<div id="area-produtospurchase">
+    @if (Model != null)
+    {
+        foreach (var purchase in Model)
+        {
+            @Html.Partial("_LinePurchaseProduct", purchase);
+        }
+    }
+</div>

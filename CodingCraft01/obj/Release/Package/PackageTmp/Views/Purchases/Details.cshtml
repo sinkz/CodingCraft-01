@@ -1,0 +1,50 @@
+﻿@model CodingCraft01.Models.Purchase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Purchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPurchase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPurchase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePurchase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePurchase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PayDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayDay)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PurchaseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

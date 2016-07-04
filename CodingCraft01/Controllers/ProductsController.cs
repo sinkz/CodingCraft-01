@@ -51,7 +51,7 @@ namespace CodingCraft01.Controllers
             {
                 ProductsSuppliers = new List<ProductSupplier>()
             });
-          
+
         }
 
         // POST: Products/Create
@@ -108,13 +108,17 @@ namespace CodingCraft01.Controllers
         {
             if (ModelState.IsValid)
             {
-                foreach (var item in product.ProductsSuppliers)
+                if (product.ProductsSuppliers != null)
                 {
-                    item.ProductId = product.ProductId;
-                    db.ProductsSuppliers.Add(item);
+                    foreach (var item in product.ProductsSuppliers)
+                    {
+                        item.ProductId = product.ProductId;
+                        db.ProductsSuppliers.Add(item);
 
+                    }
                 }
-                
+
+
                 db.Entry(product).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

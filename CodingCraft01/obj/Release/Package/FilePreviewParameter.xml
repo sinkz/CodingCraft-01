@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="sinkzoz-001-site1" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Adiego\\Source\\Repos\\CodingCraft-01\\CodingCraft01\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Adiego\\Source\\Repos\\CodingCraft-01\\CodingCraft01\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="CodingCraft-Web.config Connection String" description="" value="Data Source=SQL5028.Smarterasp.net;Initial Catalog=DB_A067C6_CodingCraft01;User ID=DB_A067C6_CodingCraft01_admin;Password=d07d28g12" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Adiego\\Source\\Repos\\CodingCraft-01\\CodingCraft01\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CodingCraft']/@connectionString" />
+  </parameter>
+</parameters>

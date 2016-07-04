@@ -1,4 +1,5 @@
 ﻿@model CodingCraft01.Models.Purchase
+@using CodingCraft01.Models
 
 @{
     ViewBag.Title = "Edit";
@@ -10,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Purchase</h4>
         <hr />
@@ -25,18 +26,11 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalPurchase, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalPurchase, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalPurchase, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DatePurchase, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DatePurchase, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DatePurchase, new { htmlAttributes = new { @class = "form-control date-picker" } })
                 @Html.ValidationMessageFor(model => model.DatePurchase, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,11 +38,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PayDay, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PayDay, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PayDay, new { htmlAttributes = new { @class = "form-control date-picker" } })
                 @Html.ValidationMessageFor(model => model.PayDay, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @Html.Partial("_PurchaseProducts", Model.PurchaseProducts)
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -56,6 +50,35 @@
         </div>
     </div>
 }
+<h2>Purchases</h2>
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            Preço
+        </th>
+        <th>
+            Quantidade
+        </th>
+
+    </tr>
+
+    @foreach (var item in ViewBag.purchaseProducts)
+    {
+        <tr>
+            <td>@item.Product.Name</td>
+
+
+            <td>@item.Price</td>
+
+
+            <td>@item.Quantity</td>
+        </tr>
+    }
+
+</table>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -63,4 +86,20 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || !isNaN(Globalize.parseFloat(value));
+        }
+        $.validator.methods.range = function (value, element, param) {
+            return this.optional(element) || (Globalize.parseFloat(value) >= param[0] && Globalize.parseFloat(value) <= param[1]);
+        }
+
+        $(document).ready(function () {
+            Globalize.culture('pt-BR');
+
+            // Only there to show which culture are being used.
+            console.log(Globalize.culture().name);
+        });
+    </script>
 }

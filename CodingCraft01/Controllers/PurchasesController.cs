@@ -96,7 +96,17 @@ namespace CodingCraft01.Controllers
                 return HttpNotFound();
             }
             ViewBag.SupplierId = new SelectList(db.Suppliers, "SupplierId", "Name", purchase.SupplierId);
-            return View(purchase);
+            ViewBag.purchaseProducts = purchase.PurchaseProducts;
+            return View(new Purchase
+            {
+                PurchaseId = purchase.PurchaseId,
+                PayDay = purchase.PayDay,
+                SupplierId = purchase.SupplierId,
+                TotalPurchase = purchase.TotalPurchase,
+                DatePurchase = purchase.DatePurchase,
+                PurchaseProducts = new List<PurchaseProduct>()
+            });
+
         }
 
         // POST: Purchases/Edit/5
@@ -104,10 +114,24 @@ namespace CodingCraft01.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "PurchaseId,SupplierId,DatePurchase,PayDay")] Purchase purchase)
+        public async Task<ActionResult> Edit([Bind(Include = "PurchaseId,SupplierId,DatePurchase,TotalPurchase,PayDay,PurchaseProducts")] Purchase purchase)
         {
             if (ModelState.IsValid)
             {
+                if (purchase.PurchaseProducts != null)
+                {
+                    var total = new Decimal(0);
+                    foreach (var item in purchase.PurchaseProducts)
+                    {
+                        total += (item.Price * item.Quantity);
+                        item.PurchaseId = purchase.PurchaseId;
+                        db.PurchasesProducts.Add(item);
+
+                    }
+                    Console.Write(purchase.TotalPurchase);
+                    purchase.TotalPurchase = total+ purchase.TotalPurchase;
+                }
+              
                 db.Entry(purchase).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

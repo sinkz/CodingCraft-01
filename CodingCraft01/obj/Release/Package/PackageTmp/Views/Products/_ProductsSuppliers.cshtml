@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CodingCraft01.Models.ProductSupplier>
+
+<div class="actions">
+    <a class="btn btn-default btn-sm" id="adicionar-novo-produtofornecedor">
+        Adicionar Novo Fornecedor
+    </a>
+    <script type="text/javascript">
+        $("#adicionar-novo-produtofornecedor").click(function () {
+            $.get('/Products/NewLineSuppliers', function (template) {
+                $("#area-produtosfornecedores").append(template);
+            });
+        });
+    </script>
+</div>
+
+<div id="area-produtosfornecedores">
+    @if (Model != null)
+    {
+        foreach (var producsupplier in Model)
+        {
+            @Html.Partial("_LineProductSupplier", producsupplier);
+        }
+    }
+</div>

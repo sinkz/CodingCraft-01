@@ -1,0 +1,18 @@
+﻿@model CodingCraft01.Models.ProductSupplier
+
+@using (Html.BeginCollectionItem("ProductsSuppliers"))
+{
+    <div class="form-group">
+        @Html.HiddenFor(model => model.ProductSupplierId)
+        @Html.HiddenFor(model => model.ProductId)
+
+        <label class="col-md-1 control-label">Nome</label>
+        <div class="col-md-5">
+            @Html.DropDownListFor(x => x.SupplierId, (SelectList)ViewBag.Suppliers, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-2">
+            <a class="btn red" onclick="$(this).parent().parent().remove();">Excluir</a>
+        </div>
+    </div>
+}
